@@ -1,6 +1,7 @@
 # Jogo de Blackjack (21)
 > status: NÃO FINALIZADO ⚠️
-Este é um jogo de Blackjack simples implementado em HTML, CSS e JavaScript. O jogador pode jogar contra o computador (dealer) para tentar alcançar uma pontuação de 21 sem estourar.
+
+### Este é um jogo de Blackjack simples implementado em HTML, CSS e JavaScript. O jogador pode jogar contra o computador (dealer) para tentar alcançar uma pontuação de 21 sem estourar.
 
 ## Como Jogar
 
