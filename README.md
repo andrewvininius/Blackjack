@@ -30,12 +30,4 @@ Este é um exemplo básico de um jogo de Blackjack. Você pode personalizar e me
 - Adicionando um sistema de apostas para tornar o jogo mais emocionante.
 - Criando uma interface de usuário mais intuitiva e responsiva.
 
-Sinta-se à vontade para explorar e expandir o código-fonte para criar a sua versão única do jogo de Blackjack!
 
-## Licença
-
-Este projeto está licenciado sob a [Licença MIT](LICENSE).
-
----
-
-Criado por [Seu Nome](https://github.com/seu-usuario-do-github)
