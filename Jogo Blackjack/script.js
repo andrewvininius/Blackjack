@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let pontuacaoComputador = 0;
     let maoJogadorArray = [];
     let maoComputadorArray = [];
+    let jogoFinalizado = false;
 
     function pegarCartaAleatoria() {
         const cartas = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
@@ -58,7 +59,26 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    function reiniciarJogo() {
+        pontuacaoJogador = 0;
+        pontuacaoComputador = 0;
+        maoJogadorArray = [];
+        maoComputadorArray = [];
+        jogoFinalizado = false;
+
+        atualizarInterface();
+
+        botaoIniciar.disabled = true;
+        botaoComprar.disabled = false;
+        botaoParar.disabled = false;
+        resultadoTexto.textContent = "";
+    }
+
     botaoIniciar.addEventListener("click", function() {
+        if (jogoFinalizado) {
+            reiniciarJogo();
+        }
+
         maoJogadorArray = [pegarCartaAleatoria(), pegarCartaAleatoria()];
         maoComputadorArray = [pegarCartaAleatoria(), pegarCartaAleatoria()];
         pontuacaoJogador = atualizarPontuacao(maoJogadorArray);
@@ -72,11 +92,27 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     botaoComprar.addEventListener("click", function() {
-        maoJogadorArray.push(pegarCartaAleatoria());
-        pontuacaoJogador = atualizarPontuacao(maoJogadorArray);
-        atualizarInterface();
+        if (!jogoFinalizado) {
+            maoJogadorArray.push(pegarCartaAleatoria());
+            pontuacaoJogador = atualizarPontuacao(maoJogadorArray);
+            atualizarInterface();
 
-        if (pontuacaoJogador >= 21) {
+            if (pontuacaoJogador >= 21) {
+                botaoComprar.disabled = true;
+                botaoParar.disabled = true;
+                while (pontuacaoComputador < 17) {
+                    maoComputadorArray.push(pegarCartaAleatoria());
+                    pontuacaoComputador = atualizarPontuacao(maoComputadorArray);
+                }
+                atualizarInterface();
+                verificarResultado();
+                jogoFinalizado = true;
+            }
+        }
+    });
+
+    botaoParar.addEventListener("click", function() {
+        if (!jogoFinalizado) {
             botaoComprar.disabled = true;
             botaoParar.disabled = true;
             while (pontuacaoComputador < 17) {
@@ -85,17 +121,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             atualizarInterface();
             verificarResultado();
+            jogoFinalizado = true;
         }
-    });
-
-    botaoParar.addEventListener("click", function() {
-        botaoComprar.disabled = true;
-        botaoParar.disabled = true;
-        while (pontuacaoComputador < 17) {
-            maoComputadorArray.push(pegarCartaAleatoria());
-            pontuacaoComputador = atualizarPontuacao(maoComputadorArray);
-        }
-        atualizarInterface();
-        verificarResultado();
     });
 });
